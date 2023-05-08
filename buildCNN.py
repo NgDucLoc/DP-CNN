@@ -38,16 +38,9 @@ def cnn_model(inter_matrix, trad_feature):
     model = Model(inputs = [A1, AA1], outputs = A11)
     model.compile(optimizer='adam', loss='binary_crossentropy')
 
-    print(model.summary())
     return model
 
 
-
-def sampling(inter, trad, label):
-    bug = label.count(1)
-    notbug = label.count(0)
-    if (bug < notbug * 0.4):
-        for _ in range(int(0.4*notbug)):
 
 
 
@@ -69,7 +62,10 @@ def test():
 
     m = cnn_model(x_train1,x_train2)
     print(m.summary())
+    m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
 
+    y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
+    print(y_predict)
 
 if __name__ == "__main__":
     test()

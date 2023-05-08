@@ -1,16 +1,13 @@
 from buildCNN import *
 from changeTypeData import *
-
-
-
-
+from sampling import *
 
 
 
 mark = 0.5
 
 # DP-CNN use camel, jEdit, lucene, xalan, xerces, synapse, poi
-def predict(name):
+def predict(name, sampling_name):
     data = OrderedDict()
     if (name == 'camel'):
         parser = Parser(camel)
@@ -18,13 +15,15 @@ def predict(name):
         x_train1 = changeToNumpy(x[1.4].src_files, 'interVector')
         x_train2 = changeToNumpy(x[1.4].src_files, 'tradFeature')
         y_train = changeToNumpy(x[1.4].src_files, 'label')
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
 
         x_test1 = changeToNumpy(x[1.6].src_files, 'interVector')
         x_test2 = changeToNumpy(x[1.6].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[1.6].src_files, 'label')
         m = cnn_model(x_train1, x_train2)
         print(1)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
 
@@ -40,12 +39,15 @@ def predict(name):
         x_train2 = changeToNumpy(x[4.0].src_files, 'tradFeature')
         y_train = changeToNumpy(x[4.0].src_files, 'label')
 
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
+
         x_test1 = changeToNumpy(x[4.1].src_files, 'interVector')
         x_test2 = changeToNumpy(x[4.1].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[4.1].src_files, 'label')
 
         m = cnn_model(x_train1, x_train2)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
         for src_id, y_real, y_pre in zip(x[4.1].src_files, y_reality, y_predict):
@@ -60,11 +62,14 @@ def predict(name):
         x_train2 = changeToNumpy(x[2.0].src_files, 'tradFeature')
         y_train = changeToNumpy(x[2.0].src_files, 'label')
 
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
+
         x_test1 = changeToNumpy(x[2.2].src_files, 'interVector')
         x_test2 = changeToNumpy(x[2.2].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[2.2].src_files, 'label')
         m = cnn_model(x_train1, x_train2)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
         for src_id, y_real, y_pre in zip(x[2.2].src_files, y_reality, y_predict):
@@ -78,11 +83,14 @@ def predict(name):
         x_train2 = changeToNumpy(x[2.5].src_files, 'tradFeature')
         y_train = changeToNumpy(x[2.5].src_files, 'label')
 
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
+
         x_test1 = changeToNumpy(x[2.6].src_files, 'interVector')
         x_test2 = changeToNumpy(x[2.6].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[2.6].src_files, 'label')
         m = cnn_model(x_train1, x_train2)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
         for src_id, y_real, y_pre in zip(x[2.5].src_files, y_reality, y_predict):
@@ -96,11 +104,14 @@ def predict(name):
         x_train2 = changeToNumpy(x[1.2].src_files, 'tradFeature')
         y_train = changeToNumpy(x[1.2].src_files, 'label')
 
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
+
         x_test1 = changeToNumpy(x[1.3].src_files, 'interVector')
         x_test2 = changeToNumpy(x[1.3].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[1.3].src_files, 'label')
         m = cnn_model(x_train1, x_train2)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
         for src_id, y_real, y_pre in zip(x[1.3].src_files, y_reality, y_predict):
@@ -116,11 +127,14 @@ def predict(name):
         x_train2 = changeToNumpy(x[1.1].src_files, 'tradFeature')
         y_train = changeToNumpy(x[1.1].src_files, 'label')
 
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
+
         x_test1 = changeToNumpy(x[1.2].src_files, 'interVector')
         x_test2 = changeToNumpy(x[1.2].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[1.2].src_files, 'label')
         m = cnn_model(x_train1, x_train2)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
         for src_id, y_real, y_pre in zip(x[1.2].src_files, y_reality, y_predict):
@@ -136,11 +150,14 @@ def predict(name):
         x_train2 = changeToNumpy(x[2.5].src_files, 'tradFeature')
         y_train = changeToNumpy(x[2.5].src_files, 'label')
 
+        # sampling to delete imbalance
+        x1_res, x2_res, y_res = sampling(sampling_name, x_train1, x_train2, y_train)
+
         x_test1 = changeToNumpy(x[3.0].src_files, 'interVector')
         x_test2 = changeToNumpy(x[3.0].src_files, 'tradFeature')
         y_reality = changeToNumpy(x[3.0].src_files, 'label')
         m = cnn_model(x_train1, x_train2)
-        m.fit([x_train1, x_train2], y_train, batch_size=32, epochs=15)
+        m.fit([x1_res, x2_res], y_res, batch_size=32, epochs=15)
 
         y_predict = m.predict([x_test1, x_test2], batch_size=32, verbose=1)
         for src_id, y_real, y_pre in zip(x[3.0].src_files, y_reality, y_predict):
@@ -151,11 +168,14 @@ def predict(name):
 
 
 if __name__ == '__main__':
+    # DP-CNN use SMOTE, BorderlineSMOTE, RandomOverSampler, ADASYN, SVMSMOTE for oversampling
+    # DP-CNN use NearMiss, NCR, RandomUnderSampler, CNN, TomekLinks, ENN, OSS for unsersampling
     # DP-CNN use camel, jEdit, lucene, xalan, xerces, synapse, poi
-    predict('camel')
-    predict('jedit')
-    predict('lucene')
-    predict('xalan')
-    predict('xerces')
-    predict('synapse')
-    predict('poi')
+    sampling_name = 'OSS'
+    predict('camel', sampling_name)
+    predict('jedit', sampling_name)
+    predict('lucene', sampling_name)
+    predict('xalan', sampling_name)
+    predict('xerces', sampling_name)
+    predict('synapse', sampling_name)
+    predict('poi', sampling_name)

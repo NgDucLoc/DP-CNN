@@ -111,8 +111,6 @@ class Parser():
 
           if (maxlen < len(token_vector)):
             maxlen = len(token_vector)
-            print(maxlen)
-      print(len(Project[version].src_files))
 
     for version, versionmap, versionlabel in zip(self.versions, self.mapdata, self.labeldata):
       token_matrix = []

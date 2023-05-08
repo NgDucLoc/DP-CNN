@@ -10,7 +10,6 @@ def changeToNumpy(src_files, properties):
     if (properties == "interVector"):
         for src_id in src_files:
             matrix.append(src_files[src_id].interVector)
-            print(src_files[src_id].interVector)
     elif (properties == "tradFeature"):
         for src_id in src_files:
             matrix.append(src_files[src_id].tradFeature)
